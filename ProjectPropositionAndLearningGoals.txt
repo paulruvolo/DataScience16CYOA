@@ -1,0 +1,14 @@
+﻿Data Set:
+	SF Crime Data
+
+Partners:
+	Keenan and Joe
+
+Learning Goals:
+	Keenan: I want to learn about data visualization as well as the machine learning backend stuff. I think this dataset is cool since it has a very location-based property that would be best represented with a heatmap or other map representations. I also want to improve my knowledge of how the algorithms work rather than simply importing libraries and hitting 'go.' 
+
+	Joe: I’d like to learn about more efficient machine learning algorithms because the algorithms we’ve learned about already were very interesting. I’d also like to learn about map-based data visualization, since it seems like a very effective way to display location-based data, which is fairly common.
+
+
+Project
+	I foresee learning more machine learning principles by investigating other strategies through the Kaggle scripts and other shared resources. There is a lot to learn from expert data scientists, and we can learn better practices and more efficient ways to manipulate and understand data through tried and true methods. We will also be interacting with a few different data visualization libraries in order to expand our data science arsenal. They’ll help us view and show off our results so we can learn from our data in multiple ways, via numbers and pictures.
