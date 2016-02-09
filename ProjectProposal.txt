@@ -1,0 +1,18 @@
+﻿Project Proposal
+1. What dataset you are planning to work with
+We are planning to work on the San Francisco Crime Classification dataset. 
+
+
+1. Who your partner is
+ We are Philip and Mackenzie.
+
+
+1. For each group member: what are you hoping to learn from this project?  These goals could be specific data manipulation skills, software engineering skills, or communication skills.
+Mack: I’m looking to learn and develop mostly data manipulation skills and the different software skills that apply. I feel like I took a cookie-cutter approach with Titanic by taking bits from tutorials and other scripts, so I want to explore and make meaning of the data in new ways that I explore. I’m hoping to find and learn to use different software modules that facilitate this data manipulation. 
+
+
+Pip: I really liked how the Titanic dataset contained a lot of information and a lot of data to look into, however there was also a lot of guidance (which initially helped with learning). With this dataset, I’m a little more interested in jumping away from tutorial-ish instructions, and diving into specific algorithms and how the pros/cons are better in situations. In other words, learning more about how each bit interacts and makes our predictions better, not just using something because a tutorial said it was pretty good. 
+
+
+1. How do you foresee this project fulfilling the learning goals identified above.  Be specific.  If there are adjustments that could be made to bring things into better alignment, let me know (I won't guarantee that I will allow it, but it's worth a discussion).
+The title is literally choose your own adventure and there are less tutorials for this dataset. All this means we are going to go out, wrangle us some algorithms, and explore around some data frames. Sounds like a grand old time.
