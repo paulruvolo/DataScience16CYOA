@@ -5,13 +5,19 @@ def load_train():
     """
     Load the train dataset
     """
-    return pd.read_csv('train.csv')
+    try:
+        return pd.read_csv('train.csv')
+    except:
+        return pd.read_csv('../train.csv')
 
 def load_test():
     """
     Load the test dataset
     """
-    return pd.read_csv('test.csv')
+    try:
+        return pd.read_csv('test.csv')
+    except:
+        return pd.read_csv('../test.csv')
 
 def clean_data(df):
     """
@@ -56,6 +62,7 @@ def clean_data(df):
     pdd_y = [df.Y[df.PdD == i].median() for i in range(10)]
     df.loc[df.X == -120.5, 'X'] = df.PdD[df.X == -120.5].replace(pdd_x)
     df.loc[df.Y == 90, 'Y'] = df.PdD[df.Y == -120.5].replace(pdd_y)
+    df = df.fillna(df.Y.value_counts().median())
 
     # Encode Category as integers
     categories = ['ARSON', 'ASSAULT', 'BAD CHECKS', 'BRIBERY', 'BURGLARY',
@@ -98,3 +105,6 @@ def logloss(y, p):
     logloss /= float(-len(p))
 
     return logloss
+
+if __name__ == '__main__':
+    load_cleaned_test()
