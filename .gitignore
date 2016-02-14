@@ -66,6 +66,4 @@ target/
 .python-version
 
 #Large CSVs
-test.csv
-train.csv
-sampleSubmission.csv
+*.csv
