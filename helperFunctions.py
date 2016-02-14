@@ -1,7 +1,7 @@
 import pandas as pd 
 from datetime import datetime
 
-def recodeData(df):
+def recodeData(df, isTrain = False):
 	'''This function takes in the dataframe that we get from loading in the 
 	SF crime data and returns a re-coded dataframe that has all the 
 	additional features we want to add and the categorical features recoded 
@@ -15,9 +15,9 @@ def recodeData(df):
 
 	addedColumns = newDate + newDistrict
 
-	columnsToDrop = ['Descript', 'Resolution']
-
-	df.drop(columnsToDrop, axis=1, inplace=True)
+	if (isTrain):
+		columnsToDrop = ['Descript', 'Resolution']
+		df.drop(columnsToDrop, axis=1, inplace=True)
 
 	return df, addedColumns
 
