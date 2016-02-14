@@ -1,6 +1,18 @@
 import pandas as pd
 import numpy as np
 
+CATEGORIES = ['ARSON', 'ASSAULT', 'BAD CHECKS', 'BRIBERY', 'BURGLARY',
+              'DISORDERLY CONDUCT', 'DRIVING UNDER THE INFLUENCE',
+              'DRUG/NARCOTIC', 'DRUNKENNESS', 'EMBEZZLEMENT', 'EXTORTION',
+              'FAMILY OFFENSES', 'FORGERY/COUNTERFEITING', 'FRAUD', 'GAMBLING',
+              'KIDNAPPING', 'LARCENY/THEFT', 'LIQUOR LAWS', 'LOITERING',
+              'MISSING PERSON', 'NON-CRIMINAL', 'OTHER OFFENSES',
+              'PORNOGRAPHY/OBSCENE MAT', 'PROSTITUTION', 'RECOVERED VEHICLE',
+              'ROBBERY', 'RUNAWAY', 'SECONDARY CODES', 'SEX OFFENSES FORCIBLE',
+              'SEX OFFENSES NON FORCIBLE', 'STOLEN PROPERTY', 'SUICIDE',
+              'SUSPICIOUS OCC', 'TREA', 'TRESPASS', 'VANDALISM', 'VEHICLE THEFT',
+              'WARRANTS', 'WEAPON LAWS']
+
 def load_train():
     """
     Load the train dataset
@@ -65,19 +77,8 @@ def clean_data(df):
     df = df.fillna(df.Y.value_counts().median())
 
     # Encode Category as integers
-    categories = ['ARSON', 'ASSAULT', 'BAD CHECKS', 'BRIBERY', 'BURGLARY',
-       'DISORDERLY CONDUCT', 'DRIVING UNDER THE INFLUENCE',
-       'DRUG/NARCOTIC', 'DRUNKENNESS', 'EMBEZZLEMENT', 'EXTORTION',
-       'FAMILY OFFENSES', 'FORGERY/COUNTERFEITING', 'FRAUD', 'GAMBLING',
-       'KIDNAPPING', 'LARCENY/THEFT', 'LIQUOR LAWS', 'LOITERING',
-       'MISSING PERSON', 'NON-CRIMINAL', 'OTHER OFFENSES',
-       'PORNOGRAPHY/OBSCENE MAT', 'PROSTITUTION', 'RECOVERED VEHICLE',
-       'ROBBERY', 'RUNAWAY', 'SECONDARY CODES', 'SEX OFFENSES FORCIBLE',
-       'SEX OFFENSES NON FORCIBLE', 'STOLEN PROPERTY', 'SUICIDE',
-       'SUSPICIOUS OCC', 'TREA', 'TRESPASS', 'VANDALISM', 'VEHICLE THEFT',
-       'WARRANTS', 'WEAPON LAWS']
     if 'Category' in df.columns:
-        df['CategoryNumber'] = df.Category.apply(lambda x: categories.index(x))
+        df['CategoryNumber'] = df.Category.apply(lambda x: CATEGORIES.index(x))
 
     return df
 
@@ -105,6 +106,17 @@ def logloss(y, p):
     logloss /= float(-len(p))
 
     return logloss
+
+def create_submission(alg, X_train, y_train, X_test, predictors, filename):
+    alg.fit(X_train[predictors], y_train)
+    predictions = alg.predict_proba(X_test[predictors])
+
+    submission = pd.DataFrame({
+        'Id': X_test.Id
+    })
+    for i in range(predictions.shape[1]):
+        submission[CATEGORIES[i]] = predictions[:,i]
+    submission.to_csv(filename, index=False)
 
 if __name__ == '__main__':
     load_cleaned_test()
