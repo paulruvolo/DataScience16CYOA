@@ -4,3 +4,4 @@
 train.csv
 test.csv
 *.csv.zip
+*.csv
