@@ -69,12 +69,14 @@ def clean_data(df):
     }
     df['PdD'] = df.PdDistrict.replace(pd_district)
 
+    # Create one-hot encoding of PdDistrict
+    df = pd.concat((df, pd.get_dummies(df['PdD'], prefix='PdD')), axis=1)
+
     # Set the invalid X and Y values to the district medians
-    pdd_x = [df.X[df.PdD == i].median() for i in range(10)]
-    pdd_y = [df.Y[df.PdD == i].median() for i in range(10)]
+    pdd_x = {i: df.X[df.PdD == i].median() for i in range(10)}
+    pdd_y = {i: df.Y[df.PdD == i].median() for i in range(10)}
     df.loc[df.X == -120.5, 'X'] = df.PdD[df.X == -120.5].replace(pdd_x)
-    df.loc[df.Y == 90, 'Y'] = df.PdD[df.Y == -120.5].replace(pdd_y)
-    df = df.fillna(df.Y.value_counts().median())
+    df.loc[df.Y == 90, 'Y'] = df.PdD[df.Y == 90].replace(pdd_y)
 
     # Encode Category as integers
     if 'Category' in df.columns:
@@ -119,4 +121,5 @@ def create_submission(alg, X_train, y_train, X_test, predictors, filename):
     submission.to_csv(filename, index=False)
 
 if __name__ == '__main__':
-    load_cleaned_test()
+    data = load_cleaned_train()
+    print data.X.min(), data.X.max()
