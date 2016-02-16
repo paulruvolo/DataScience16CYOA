@@ -1,4 +1,5 @@
 test.csv
+*.csv
 train.csv
 sampleSubmission.csv
 testResult.csv
