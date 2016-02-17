@@ -42,6 +42,13 @@ def clean_data(df):
     df['Hour'] = df.Dates.apply(lambda x: int(x.split(' ')[1].split(':')[0]))
     df['Minute'] = df.Dates.apply(lambda x: int(x.split(' ')[1].split(':')[1]))
 
+    #Encode first minute for the filing time
+    # df['FirstMin'] = int(df.Minute.apply(lambda x: x==1))
+    df['ZeroHour'] = df.Hour.apply(lambda x: int(x==0)) 
+    df['FirstMin'] = df.Minute.apply(lambda x: int(x==1))
+    df['BogusReport'] = df.Dates.apply(lambda x: int((int(x.split(' ')[1].split(':')[0])+int(x.split(' ')[1].split(':')[1])) == 1))
+    df['NBogusReport'] = df.Dates.apply(lambda x: int((int(x.split(' ')[1].split(':')[0])+int(x.split(' ')[1].split(':')[1])) == 12))
+
     # Encode DayOfWeek as integers
     day_of_week = {
         'Sunday': 0,
@@ -53,6 +60,12 @@ def clean_data(df):
         'Saturday': 6
     }
     df['DoW'] = df.DayOfWeek.replace(day_of_week)
+
+    #Encode Time of Day
+    df['Morning'] = df.Hour.apply(lambda x: int(x >= 5 and x < 12))
+    df['Afternoon'] = df.Hour.apply(lambda x: int(x >= 12 and x < 17))
+    df['Evening'] = df.Hour.apply(lambda x: int(x >= 17 and x < 24))
+    df['Night'] = df.Hour.apply(lambda x: int(x >= 0 and x < 5))
 
     # Encode PdDistrict as integers
     pd_district = {
@@ -87,7 +100,7 @@ def clean_data(df):
     on_corner = []
 
     for address in df.Address:
-        on_corner.append('/' in address)
+        on_corner.append(int('/' in address))
     df['CornerCrime'] = on_corner
 
     streets = {}
@@ -99,7 +112,7 @@ def clean_data(df):
         except:
             pass
 
-    crime_streets = sorted(streets,key=streets.get,reverse=True)[0:10]
+    crime_streets = sorted(streets,key=streets.get,reverse=True)[0:1]
 
     count = 0
     for street in crime_streets:
