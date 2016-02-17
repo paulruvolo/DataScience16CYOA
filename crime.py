@@ -107,6 +107,13 @@ def clean_data(df):
         df[label] = [int(street in element) for element in df.Address]
         count += 1
 
+    # Drop unnecessary colummns
+    df.drop(['Dates', 'DayOfWeek', 'PdDistrict', 'Address'], inplace=True, axis=1)
+    try:
+        df.drop(['Category', 'Descript', 'Resolution'], inplace=True, axis=1)
+    except ValueError:
+        pass  # the test data won't have these columns
+
     return df
 
 def load_cleaned_train():
@@ -146,6 +153,5 @@ def create_submission(alg, X_train, y_train, X_test, predictors, filename):
     submission.to_csv(filename, index=False)
 
 if __name__ == '__main__':
-    train = load_cleaned_train()
-    train.info()
-
+    test = load_cleaned_test()
+    test.info()
