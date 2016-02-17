@@ -80,6 +80,31 @@ def clean_data(df):
     if 'Category' in df.columns:
         df['CategoryNumber'] = df.Category.apply(lambda x: CATEGORIES.index(x))
 
+    
+    #Encode information from addresses
+    on_corner = []
+
+    for address in df.Address:
+        on_corner.append('/' in address)
+    df['CornerCrime'] = on_corner
+
+    streets = {}
+    for element in df.Address:
+        address = element.split(' / ')
+        streets[address[0]] = streets.get(address[0],0)+1
+        try:
+            streets[address[1]] = streets.get(address[1],0)+1
+        except:
+            pass
+
+    crime_streets = sorted(streets,key=streets.get,reverse=True)[0:10]
+
+    count = 0
+    for street in crime_streets:
+        label = 'ST_'+str(count)
+        df[label] = [int(street in element) for element in df.Address]
+        count += 1
+
     return df
 
 def load_cleaned_train():
@@ -119,4 +144,5 @@ def create_submission(alg, X_train, y_train, X_test, predictors, filename):
     submission.to_csv(filename, index=False)
 
 if __name__ == '__main__':
-    load_cleaned_test()
+    train = load_cleaned_train()
+    train.info()
