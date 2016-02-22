@@ -42,12 +42,9 @@ def clean_data(df):
     df['Hour'] = df.Dates.apply(lambda x: int(x.split(' ')[1].split(':')[0]))
     df['Minute'] = df.Dates.apply(lambda x: int(x.split(' ')[1].split(':')[1]))
 
-    #Encode first minute for the filing time
-    # df['FirstMin'] = int(df.Minute.apply(lambda x: x==1))
-    df['ZeroHour'] = df.Hour.apply(lambda x: int(x==0)) 
-    df['FirstMin'] = df.Minute.apply(lambda x: int(x==1))
-    df['BogusReport'] = df.Dates.apply(lambda x: int((int(x.split(' ')[1].split(':')[0])+int(x.split(' ')[1].split(':')[1])) == 1))
-    df['NBogusReport'] = df.Dates.apply(lambda x: int((int(x.split(' ')[1].split(':')[0])+int(x.split(' ')[1].split(':')[1])) == 12))
+    # Create columns indicating potentially bogus reports filed at 00:01 and 12:00
+    df['BogusReport'] = df.apply(lambda x: x.Hour == 0 and x.Minute == 1, axis=1)
+    df['NBogusReport'] = df.apply(lambda x: x.Hour == 12 and x.Minute == 0, axis=1)
 
     # Encode DayOfWeek as integers
     day_of_week = {
@@ -61,7 +58,7 @@ def clean_data(df):
     }
     df['DoW'] = df.DayOfWeek.replace(day_of_week)
 
-    #Encode Time of Day
+    # Encode Time of Day
     df['Morning'] = df.Hour.apply(lambda x: int(x >= 5 and x < 12))
     df['Afternoon'] = df.Hour.apply(lambda x: int(x >= 12 and x < 17))
     df['Evening'] = df.Hour.apply(lambda x: int(x >= 17 and x < 24))
