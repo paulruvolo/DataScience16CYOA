@@ -120,7 +120,7 @@ def clean_data(df):
     # Drop unnecessary colummns
     df.drop(['Dates', 'DayOfWeek', 'PdDistrict', 'Address'], inplace=True, axis=1)
     try:
-        df.drop(['Category', 'Descript', 'Resolution'], inplace=True, axis=1)
+        df.drop(['Descript', 'Resolution'], inplace=True, axis=1)
     except ValueError:
         pass  # the test data won't have these columns
 
