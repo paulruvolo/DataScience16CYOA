@@ -1,0 +1,43 @@
+## Feature Engineering
+
+The takeaways that we identified can easily be interpreted into features which can be added to our provided data. First, spatial elements: corner crimes are identified and a flag is created CrimeCorner; street addresses are further parsed and processed to identify the most frequently seen streets - some number of these streets are given their own flag labeled with the convention ST_n where n is the street rank. Temporal elements which are specially captured include flags for whether a report is filed at the first minute after midnight, or exactly at noon. 
+
+These features were created within the file crime.py and have been applied to the data set loaded herein.
+
+## Classifiers
+
+[stuff we've already written/introduction]
+
+### Baseline/Cross-Validation
+
+[stuff we've already written here]
+
+### Random Forest
+After some inspection, we found that the Random Forest Classifier provided the most robust results for our computational power - a Dell Latitude with 8GB of RAM and an Intel Core i7-2760QM CPU. We actively decided not to use a super computer for this project, in an effort to test our feature engineering abilities. 
+
+A Random Forest is an ensemble learning method in which a number of decision trees are created during the 'training' period and the results of the classifier reflect the mode of the labels classified during processing. It is in this way that Random Forests alledgedly correct for some of the overfitting which can befall using a single Decision Tree. 
+
+The Random Forest model which can be accessed by scikitlearn has a number of parameters which can be tuned. We focused significnatly on varying n_estimators and max_depth. 
+
+The first parameter reflects the number of decision trees which will make the forest. Generally we chose to use between 20-30 trees. At appropximately 30 trees, the computational load was at its maximum, creating a limit on our forest size. For max_depth, a parameter which defines how 'deep' a single decision tree should be (and often used to limit overfitting for a single tree), we varied between integers 10 and 15. 
+
+For a number of parameter combinations, we demonstrate the performance of Random Forest on the training data. Results are given as a logloss indicator, which was the requested form of answer by Kaggle.com. 
+
+[CODE THINGS HERE]
+
+## Results
+Be using the set of predictors that received the best cross-validation score, we create a simple submission file to Kaggle.com to truly test our model. The test data which we have trained for represents every other week from 2003-2015 that is not present in the training data. In this way, our cross-validation scores should be relatively close to our results when applying the model to the test data (assuming that the split of the training data is a good split). 
+
+[CREATING A SUBMISSION FILE HERE].
+
+Ultimately, our best classifying model achieved a logloss score of 2.32886. 
+
+## Future Work
+To further improve our classification model, we believe that further work would need to be done to add several new features to the data, including flags for holidays, city-specific events, and historical events. Spatially, there may be some value in cross-referencing socio-economic and other demographic information with the addresses/coordinates of the city, which could have some relationship with the types of crimes in various locations. 
+
+## Conclusions
+Generally, this project allowed us the opportunity to develop interesting visual representations in order to conduct a thorough data exploration. The practice in feature engineering, and the ability to explore a variety of classifiers in scikitlearn also yielded an opportunity to better understand the strengths of various classifiers. Given the nature of this data set, we found that the Random Forest performed most robustly, but Decision Trees and Logistic Regression Classifiers also had strength.
+
+Further, the topic of this exploration - crime - is an interesting social commentary. The 2016 Super Bowl was recently held in San Francisco. Social media and news outlets reported on the conditions of the city: the homelessness, the gentrification, and the race tension which had not necessarily been known to the nation before such reporting. After exploring this dataset, the trends in crime - the net increase in crime, the changing types of crime - could all potentially be syptoms of a systematic takeover by the priveleged of a dynamic city. 
+
+As we move forward in this class, but also as engineers who will have access to significant amounts of data in the future, this exercise has revealed the importance of taking time to understand the context, explore a variety of parameters, and think critically on how to best model a system to yield useful/impactful results.
