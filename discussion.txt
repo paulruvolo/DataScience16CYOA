@@ -1,0 +1,23 @@
+bernoullinb was a useful tool to jump into
+  naive bayes is down a similar alley
+
+the map of what tools to use from scikitlearn helps you find what algorithm to use depending on how much data and other factors
+
+bernoulli distributions are discrete binary distributions
+  tracks the occurrences of 1
+
+
+From a modeling standpoint, what seemed to work well?  What didn't work well?  By modeling standpoint I mean things like choice of machine learning algorithm, feature engineering, model tuning, etc.
+  Helped to look at what other people did to figure out our initial model. Figuring out how to use any model revolves around building off other's research and then refining yourself.
+
+From a process standpoint, what worked well?  What didn't work well?  By process standpoint I mean in terms of either how you structured your experiments or your collaboration with your teammate.
+  Working on this project (and specifically jupyter notebooks) is not conducive to collaboration. It's hard to share and know where each person should be working on what. This is one of the first classes that do-learn does not seem to be as in effect, and it is hard to know if we are heading in the right direction. Process worked best when separate forks were used, then one final document was created. 
+
+What are the things you learned from this project that you are most excited about?
+  How to figure out how to use sci kit learn and those types of models. Also, learning the syntax is nice. We feel confident that we would rather use pandas than tableau now.
+
+What are the things related to this project that you would like to learn, or learn in more depth?
+  Like to learn more about shaping parameters and tuning parameters.
+
+What were the most striking or surprising aspects of your work on this assignment?  These could be results, resources you found, tools that you used, etc.
+  RandomForestClassifier did not seem to improve results even though it should have theoretically provided a more interesting result. The simple stupid model more often worked better (score higher on Kaggle) than the complex ones.
