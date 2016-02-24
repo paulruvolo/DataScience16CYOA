@@ -1,0 +1,6 @@
+test.csv
+*.csv
+train.csv
+sampleSubmission.csv
+testResult.csv
+testResult2.csv
