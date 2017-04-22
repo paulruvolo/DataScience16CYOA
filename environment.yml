@@ -1,0 +1,7 @@
+name: ml_is
+dependencies:
+  - ipykernel
+  - jupyter_client
+  - matplotlib
+  - pandas
+  - python=3.6
