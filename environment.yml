@@ -1,7 +1,6 @@
 name: ml_is
 channels:
   - conda-forge
-  - ska
 dependencies:
   - ipykernel
   - ipython
@@ -11,7 +10,6 @@ dependencies:
   - matplotlib
   - nltk
   - pandas
-  - pygtk
   - python=3.6
   - scikit-learn
   - seaborn
