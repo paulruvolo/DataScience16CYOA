@@ -1,0 +1,15 @@
+name: ml_is
+channels:
+  - conda-forge
+dependencies:
+  - ipykernel
+  - ipython
+  - ipywidgets
+  - jupyter_client
+  - jupyter_contrib_nbextensions
+  - matplotlib
+  - nltk
+  - pandas
+  - python=3.6
+  - scikit-learn
+  - seaborn
